@@ -1,7 +1,5 @@
 github.com/cnkei/gospline v0.0.0-20191204072713-842a72f86331 h1:LaKIRdLDg4mn0OkEtcr3unP0M8uQ1oyEw/05SbX/O48=
 github.com/cnkei/gospline v0.0.0-20191204072713-842a72f86331/go.mod h1:DXXGDL64/wxXgBSgmGMEL0vYC0tdvpgNhkJrvavhqDM=
-github.com/digisan/go-handy-cv v0.0.10 h1:2WiRY4IKDX0m3kXsIO0UB2Z25fJqjFF3H/MvtXplfaw=
-github.com/digisan/go-handy-cv v0.0.10/go.mod h1:86e1bXt7ToIgf4NXb75UwYN0yKG3DYVj9QbDY+0+dJ4=
 github.com/digisan/gotk v0.0.40 h1:UB9XcQ5HOFQDy7G+LIyzN8uUPOUO80/jhLt3jZIyUzw=
 github.com/digisan/gotk v0.0.40/go.mod h1:UQ8YCI0uvFowgH6q7cI6FGDy2vMLmCIgLb/E3HqkUU0=
 github.com/fogleman/gg v1.3.0 h1:/7zJX8F6AaYQc57WQCyN9cAIz+4bCJGO9B+dyW29am8=

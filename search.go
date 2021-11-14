@@ -4,10 +4,16 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+	"math"
 
-	gocv "github.com/digisan/go-handy-cv/blob"
 	gotkio "github.com/digisan/gotk/io"
 )
+
+func PtDis(pt1, pt2 image.Point) int {
+	dx := math.Abs(float64(pt1.X - pt2.X))
+	dy := math.Abs(float64(pt1.Y - pt2.Y))
+	return int(math.Sqrt(dx*dx + dy*dy))
+}
 
 func FindPosByClr(img image.Image, c color.RGBA) (pos []image.Point) {
 	rect := img.Bounds()
@@ -38,7 +44,7 @@ func FindROIrgbaByClr(img image.Image, c color.RGBA, sRadius, iRadius int, audit
 NEXT:
 	for pt1, rgba := range mPtRGBA {
 		for pt2 := range mPtROI {
-			if gocv.PtDis(pt1, pt2) < iRadius {
+			if PtDis(pt1, pt2) < iRadius {
 				continue NEXT
 			}
 		}

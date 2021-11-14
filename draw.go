@@ -7,7 +7,6 @@ import (
 	"sort"
 
 	"github.com/cnkei/gospline"
-	"github.com/digisan/go-handy-cv/blob"
 	"github.com/digisan/gotk/slice/ti"
 	"github.com/digisan/gotk/slice/tu8i"
 	"github.com/fogleman/gg"
@@ -50,27 +49,6 @@ func DrawVLine(img *image.Gray, x, top, bottom int, paint *image.Gray) *image.Gr
 
 	draw.Draw(img, image.Rect(x, top, x+1, bottom), paint, image.Point{0, 0}, draw.Src)
 	return img
-}
-
-func DrawBlob(left, top, right, bottom int, bytes []byte) *image.Gray {
-	paint := image.NewGray(image.Rect(left, top, right, bottom))
-	for i := 0; i < len(paint.Pix); i++ {
-		paint.Pix[i] = 0
-	}
-
-	blobs := blob.DetectBlob(right-left, bottom-top, right-left, bytes, func(x, y int, p byte) bool {
-		return p < 40
-	})
-
-	hImg := image.NewGray(image.Rect(left, top, right, bottom))
-	hImg.Pix = bytes
-
-	for _, blob := range blobs {
-		loc := blob.Loc()
-		left, top, right, bottom := loc.Min.X, loc.Min.Y, loc.Max.X, loc.Max.Y
-		hImg = DrawRect(hImg, left, top, right, bottom, paint)
-	}
-	return hImg
 }
 
 func DrawHisto(mHisto, mPeak, mBottom map[byte]int) (hImg *image.Gray) {
