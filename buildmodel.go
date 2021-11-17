@@ -33,9 +33,9 @@ func NewROI2(file string, rect image.Rectangle) ROI {
 	return NewROI(file, rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y)
 }
 
-func ModelROI(imgfile, roifile string, rect image.Rectangle) {
+func ModelROI(imgfile, outROIfile string, rect image.Rectangle) {
 	roi := NewROI2(imgfile, rect)
-	saveJPG(roi.data, roifile)
+	saveJPG(roi.data, outROIfile)
 }
 
 func MarkedArea2JSON(mROIFile, outJSONFile string) {
@@ -83,18 +83,18 @@ func LoadArea(areaJson string) map[image.Point]struct{} {
 	return mPt
 }
 
-func MarkAreaFromJSON(imgFile, areaJsonFile, markImgFile, color string) {
+func MarkAreaFromJSON(imgFile, areaJsonFile, outMarkImgFile, color string) {
 	// load & re-mark
 	mPt := LoadArea(areaJsonFile)
 	pts := []image.Point{}
 	for pt := range mPt {
 		pts = append(pts, pt)
 	}
-	DrawCircle(loadImage(imgFile), pts, 1, color, markImgFile)
+	DrawCircle(loadImage(imgFile), pts, 1, color, outMarkImgFile)
 }
 
-func MarkArea(imgFile, markImgFile, color string, pts []image.Point) {
-	DrawCircle(loadImage(imgFile), pts, 1, color, markImgFile)
+func MarkArea(imgFile, outMarkImgFile, color string, pts []image.Point) {
+	DrawCircle(loadImage(imgFile), pts, 1, color, outMarkImgFile)
 }
 
 func SplitAreaPts(areaJson, xy string, n int) [][]image.Point {

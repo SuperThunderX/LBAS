@@ -3,4 +3,5 @@
 set -e
 
 rm -rf ./out/*
-rm -rf ./cfg/*
+rm -rf ./temp/*
+rm -f lbas

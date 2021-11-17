@@ -23,10 +23,12 @@ func TestModelROI(t *testing.T) {
 }
 
 func TestFindColorArea(t *testing.T) {
+	// Generate Area Configuration
 	MarkedArea2JSON("./cfg/model-roi.jpg", "./cfg/key-area.json")
 }
 
 func TestLoadKeyArea(t *testing.T) {
+	// Audit marked ROI image
 	MarkAreaFromJSON("./cfg/model-roi.jpg", "./cfg/key-area.json", "./cfg/re-mark.jpg", "B")
 }
 
