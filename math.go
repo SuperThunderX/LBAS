@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"sort"
 
 	"github.com/digisan/gotk/slice/tf64"
@@ -294,4 +295,40 @@ func slope(data []int, step, nSmooth int) (sp []int) {
 		sp = append(sp, s.ix)
 	}
 	return
+}
+
+func AveByte(data []byte) float64 {
+	sum := 0.0
+	for _, v := range data {
+		sum += float64(v)
+	}
+	return sum / float64(len(data))
+}
+
+func StdDevByte(data []byte) float64 {
+	sum2 := 0.0
+	ave := AveByte(data)
+	for _, v := range data {
+		d2 := (float64(v) - ave) * (float64(v) - ave)
+		sum2 += d2
+	}
+	return math.Sqrt(sum2 / float64(len(data)))
+}
+
+func AveFloat(data []float64) float64 {
+	sum := 0.0
+	for _, v := range data {
+		sum += v
+	}
+	return sum / float64(len(data))
+}
+
+func StdDevFloat(data []float64) float64 {
+	sum2 := 0.0
+	ave := AveFloat(data)
+	for _, v := range data {
+		d2 := (v - ave) * (v - ave)
+		sum2 += d2
+	}
+	return math.Sqrt(sum2 / float64(len(data)))
 }

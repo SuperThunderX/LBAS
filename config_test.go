@@ -1,10 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-func main() {
-
+func TestLoadConfig(t *testing.T) {
 	cfg := LoadConfig("./cfg/config.json")
 	fmt.Println(cfg)
-
 }

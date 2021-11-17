@@ -5,6 +5,7 @@ import (
 
 	"fmt"
 	_ "image/png"
+	"os"
 	"testing"
 	"time"
 
@@ -14,7 +15,9 @@ import (
 func TestSplitRGBA(t *testing.T) {
 	defer gotk.TrackTime(time.Now())
 
-	img := loadImage("./in/sample/1.jpg")
+	os.MkdirAll("./out", os.ModePerm)
+
+	img := loadImage("./cfg/roi-(2500,50)-(3000,2162).jpg")
 	fmt.Println(img.Bounds())
 
 	r, g, b, a := SplitRGBA(img)

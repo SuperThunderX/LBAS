@@ -1,0 +1,9 @@
+{
+    "roi": {
+        "left": 2500,
+        "top": 50,
+        "right": 3000,
+        "bottom": 2162
+    },
+    "key-area": "./key-area.json"
+}

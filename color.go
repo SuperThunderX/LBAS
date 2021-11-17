@@ -11,6 +11,16 @@ const (
 	ClrErr = 4
 )
 
+func Color2RGBA(clr color.Color) (r, g, b, a byte) {
+	r32, g32, b32, a32 := clr.RGBA()
+	return byte(r32 >> 8), byte(g32 >> 8), byte(b32 >> 8), byte(a32 >> 8)
+}
+
+func Color2Gray(clr color.Color) byte {
+	gray32, _, _, _ := clr.RGBA()
+	return byte(gray32 >> 8)
+}
+
 func absDiffInt(a, b int) int {
 	return int(math.Abs(float64(a) - float64(b)))
 }
