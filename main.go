@@ -126,9 +126,10 @@ func main() {
 		// })
 
 		if len(Indices) == 0 {
-			lk.Log2F(true, "failed")
-			lk.Log("Cannot find scale, @%s", file)
-			return
+			// lk.Log2F(true, "failed")
+			// lk.Log("Cannot find scale, @%s", file)
+			// return
+			continue
 		}
 
 		Index := Indices[0]
