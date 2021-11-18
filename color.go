@@ -29,6 +29,10 @@ func absDiffByte(a, b byte) byte {
 	return byte(math.Abs(float64(a) - float64(b)))
 }
 
+func absDiffFloat(a, b float64) float64 {
+	return math.Abs(a - b)
+}
+
 func ColorEqual(c1, c2 color.RGBA, eR, eG, eB, eA int) bool {
 	if abs(int(c1.R)-int(c2.R)) <= eR &&
 		abs(int(c1.G)-int(c2.G)) <= eG &&
