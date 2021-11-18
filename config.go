@@ -15,12 +15,14 @@ type Config struct {
 		Right  int `json:"right"`
 		Bottom int `json:"bottom"`
 	} `json:"roi"`
-	KeyArea string `json:"key-area"`
+	KeyArea    string     `json:"key-area"`
+	ValidRange [2]float64 `json:"valid-range"`
 }
 
 func (c *Config) String() (s string) {
 	s += fmt.Sprintln(c.Roi)
 	s += fmt.Sprintln(c.KeyArea)
+	s += fmt.Sprintln(c.ValidRange)
 	return s
 }
 

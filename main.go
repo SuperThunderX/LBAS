@@ -131,8 +131,11 @@ func main() {
 		Index := Indices[0]
 		scale := float64(Index) / float64(len(areas))
 
-		// audit scaled ROI image
-		scaleFile := filepath.Join(outpath, fmt.Sprintf("%s-roi-%.02f.jpg", filename, scale))
-		MarkArea(roiFile, scaleFile, "G", areas[Index])
+		ymin, ymax := cfg.ValidRange[0], cfg.ValidRange[1]
+		if scale >= ymin && scale < ymax {
+			// audit scaled ROI image
+			scaleFile := filepath.Join(outpath, fmt.Sprintf("%s-roi-%.02f.jpg", filename, scale))
+			MarkArea(roiFile, scaleFile, "G", areas[Index])
+		}
 	}
 }
