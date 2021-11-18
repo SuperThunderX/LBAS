@@ -12,6 +12,7 @@ import (
 
 	"github.com/digisan/gotk"
 	"github.com/digisan/gotk/filedir"
+	lk "github.com/digisan/logkit"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 
 	inpathPtr := flag.String("in", "./in", "input folder for original images")
 	outpathPtr := flag.String("out", "./out", "output folder for scaled images")
-	cfgpathPtr := flag.String("cfg", "./config.json", "config file(json) for running program")
+	cfgpathPtr := flag.String("cfg", "./cfg/config.json", "config file(json) for running program")
 	flag.Parse()
 
 	inpath := *inpathPtr
@@ -125,7 +126,9 @@ func main() {
 		// })
 
 		if len(Indices) == 0 {
-			fmt.Println("Cannot find scale, ignore")
+			lk.Log2F(true, "failed")
+			lk.Log("Cannot find scale, @%s", file)
+			return
 		}
 
 		Index := Indices[0]
