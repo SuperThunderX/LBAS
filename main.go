@@ -101,12 +101,20 @@ func main() {
 			return scale3list[i].sd > scale3list[j].sd
 		})
 
+		if len(scale3list) == 0 {
+			lk.Log2F(true, "failed")
+			lk.Log("Error 1, Cannot find scale, @%s", file)
+			// return
+			continue
+		}
+
 		Indices := []int{}
 		for _, s3 := range scale3list {
 			p := s3.index
 			ave := aves[p]
 			if p >= 3 && p <= len(scale3list) {
 				// *** up bright, down dark ***
+				// normal image
 				if ave > aves[p+1] && ave > aves[p+2] && ave > aves[p+3] {
 					if aves[p-3] > ave && aves[p-2] > ave && aves[p-1] > ave {
 						if p > 10 && p < len(aves)-10 {
@@ -114,6 +122,7 @@ func main() {
 								absDiffFloat(aves[p-9], aves[0]) < 20 &&
 								absDiffFloat(aves[p+9], aves[0]) > 40 {
 								Indices = append(Indices, p)
+								continue
 							}
 						}
 					}
@@ -125,11 +134,38 @@ func main() {
 		// 	return Indices[i] < Indices[j]
 		// })
 
+		// check strong reflection area
 		if len(Indices) == 0 {
-			// lk.Log2F(true, "failed")
-			// lk.Log("Cannot find scale, @%s", file)
-			// return
-			continue
+
+			thBright := 150.0
+			thContrast := 15.0
+
+			for i := 3; i < 50; i++ {
+				p := i
+				ave := aves[i]
+				if aves[p-1] > thBright || aves[p-2] > thBright || aves[p-3] > thBright {
+					fmt.Println("strong reflection 1")
+					if ave > aves[p+1] && ave > aves[p+2] && ave > aves[p+3] {
+						fmt.Println("strong reflection 2")
+						if absDiffFloat(ave, aves[p+1]) > thContrast &&
+							absDiffFloat(ave, aves[p+2]) > thContrast &&
+							absDiffFloat(ave, aves[p+3]) > thContrast {
+							fmt.Println("strong reflection 3")
+							if absDiffFloat(aves[p+1], aves[p+2]) < thContrast*2 &&
+								absDiffFloat(aves[p+2], aves[p+3]) < thContrast*2 {
+								Indices = append(Indices, p)
+								break
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if len(Indices) == 0 {
+			lk.Log2F(true, "failed")
+			lk.Log("Error 2, Cannot find scale, @%s", file)
+			continue // next image
 		}
 
 		Index := Indices[0]

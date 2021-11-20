@@ -3,6 +3,5 @@
 set -e
 
 rm -rf ./out/*
-rm -rf ./temp/*
 rm -f lbas
 rm -r *.log

@@ -17,7 +17,7 @@ func TestSplitRGBA(t *testing.T) {
 
 	os.MkdirAll("./out", os.ModePerm)
 
-	img := loadImage("./cfg/roi-(2500,50)-(3000,2162).jpg")
+	img := loadImage("./out/sample-roi.jpg")
 	fmt.Println(img.Bounds())
 
 	r, g, b, a := SplitRGBA(img)
@@ -29,5 +29,5 @@ func TestSplitRGBA(t *testing.T) {
 	// ///
 
 	com := CompositeRGBA(r, g, b, a)
-	saveJPG(com, "./out/com1.png")
+	saveJPG(com, "./out/com1.jpg")
 }
