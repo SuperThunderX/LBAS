@@ -19,11 +19,7 @@ func main() {
 
 	defer gotk.TrackTime(time.Now())
 
-	// inpath := "./in"
-	// outpath := "./out"
-	// cfgpath := "./cfg/config.json"
-
-	inpathPtr := flag.String("in", "./in", "input folder for original images")
+	inpathPtr := flag.String("in", "./in/11.21", "input folder for original images")
 	outpathPtr := flag.String("out", "./out", "output folder for scaled images")
 	cfgpathPtr := flag.String("cfg", "./cfg/config.json", "config file(json) for running program")
 	flag.Parse()
@@ -102,9 +98,8 @@ func main() {
 		})
 
 		if len(scale3list) == 0 {
-			lk.Log2F(true, "failed")
-			lk.Log("Error 1, Cannot find scale, @%s", file)
-			// return
+			lk.Log2F(true, "./ignore.log")
+			lk.Log("Ignore 1, Cannot find scale, @%s", file)
 			continue
 		}
 
@@ -136,23 +131,27 @@ func main() {
 
 		// check strong reflection area
 		if len(Indices) == 0 {
+			fmt.Println("extra detect 0")
 
-			thBright := 150.0
-			thContrast := 15.0
+			// detectFrom := int(float64(N) * cfg.ValidRange[0])
+			detectTo := int(float64(N) * cfg.ValidRange[1])
+			thBright := cfg.ThBright     // 50.0
+			thContrast := cfg.ThContrast // 5.0
 
-			for i := 3; i < 50; i++ {
+			for i := 3; i < detectTo; i++ {
 				p := i
 				ave := aves[i]
 				if aves[p-1] > thBright || aves[p-2] > thBright || aves[p-3] > thBright {
-					fmt.Println("strong reflection 1")
+					fmt.Println("extra detect 1")
 					if ave > aves[p+1] && ave > aves[p+2] && ave > aves[p+3] {
-						fmt.Println("strong reflection 2")
+						fmt.Println("extra detect 2")
 						if absDiffFloat(ave, aves[p+1]) > thContrast &&
 							absDiffFloat(ave, aves[p+2]) > thContrast &&
 							absDiffFloat(ave, aves[p+3]) > thContrast {
-							fmt.Println("strong reflection 3")
+							fmt.Println("extra detect 3")
 							if absDiffFloat(aves[p+1], aves[p+2]) < thContrast*2 &&
 								absDiffFloat(aves[p+2], aves[p+3]) < thContrast*2 {
+								fmt.Println("extra detect 4")
 								Indices = append(Indices, p)
 								break
 							}
@@ -163,8 +162,8 @@ func main() {
 		}
 
 		if len(Indices) == 0 {
-			lk.Log2F(true, "failed")
-			lk.Log("Error 2, Cannot find scale, @%s", file)
+			lk.Log2F(true, "./ignore.log")
+			lk.Log("Ignore 2, Cannot find scale, @%s", file)
 			continue // next image
 		}
 

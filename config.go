@@ -17,12 +17,16 @@ type Config struct {
 	} `json:"roi"`
 	KeyArea    string     `json:"key-area"`
 	ValidRange [2]float64 `json:"valid-range"`
+	ThBright   float64    `json:"thBright"`
+	ThContrast float64    `json:"thContrast"`
 }
 
 func (c *Config) String() (s string) {
-	s += fmt.Sprintln(c.Roi)
-	s += fmt.Sprintln(c.KeyArea)
-	s += fmt.Sprintln(c.ValidRange)
+	s += fmt.Sprintf("%-40s%v\n", "checking area:", c.Roi)
+	s += fmt.Sprintf("%-40s%v\n", "key area:", c.KeyArea)
+	s += fmt.Sprintf("%-40s%v\n", "checking range:", c.ValidRange)
+	s += fmt.Sprintf("%-40s%v\n", "threshold for brighter area:", c.ThBright)
+	s += fmt.Sprintf("%-40s%v\n", "contrast for bright/dark areas:", c.ThContrast)
 	return s
 }
 
