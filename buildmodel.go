@@ -83,12 +83,12 @@ func LoadArea(areaJson string) map[image.Point]struct{} {
 	return mPt
 }
 
-func MarkAreaFromJSON(imgFile, areaJsonFile, outMarkImgFile, color string) {
+func MarkAreaFromJSON(imgFile, areaJsonFile string, offsetX, offsetY int, outMarkImgFile, color string) {
 	// load & re-mark
 	mPt := LoadArea(areaJsonFile)
 	pts := []image.Point{}
 	for pt := range mPt {
-		pts = append(pts, pt)
+		pts = append(pts, image.Point{X: pt.X + offsetX, Y: pt.Y + offsetY})
 	}
 	DrawCircle(loadImage(imgFile), pts, 1, color, outMarkImgFile)
 }
@@ -97,13 +97,13 @@ func MarkArea(imgFile, outMarkImgFile, color string, pts []image.Point) {
 	DrawCircle(loadImage(imgFile), pts, 1, color, outMarkImgFile)
 }
 
-func SplitAreaPts(areaJson, xy string, n int) [][]image.Point {
+func SplitAreaPts(areaJson string, offsetX, offsetY int, xy string, n int) [][]image.Point {
 
 	areas := make([][]image.Point, int(float64(n)*1.1))
 
 	pts := []image.Point{}
 	for pt := range LoadArea(areaJson) {
-		pts = append(pts, pt)
+		pts = append(pts, image.Point{X: pt.X + offsetX, Y: pt.Y + offsetY})
 	}
 
 	min, max := 0, 0

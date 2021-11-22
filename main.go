@@ -19,7 +19,7 @@ func main() {
 
 	defer gotk.TrackTime(time.Now())
 
-	inpathPtr := flag.String("in", "./in/11.21", "input folder for original images")
+	inpathPtr := flag.String("in", "./in/sample", "input folder for original images")
 	outpathPtr := flag.String("out", "./out", "output folder for scaled images")
 	cfgpathPtr := flag.String("cfg", "./cfg/config.json", "config file(json) for running program")
 	flag.Parse()
@@ -57,10 +57,10 @@ func main() {
 
 		// audit marked ROI image
 		// markedFile := filepath.Join(outpath, fmt.Sprintf("%s-roi-mark.jpg", filename))
-		// MarkAreaFromJSON(roiFile, cfg.KeyArea, markedFile, "R")
+		// MarkAreaFromJSON(roiFile, cfg.KeyArea, cfg.KeyAreaOffset, 0, markedFile, "R")
 
 		N := 100
-		areas := SplitAreaPts(cfg.KeyArea, "Y", N)
+		areas := SplitAreaPts(cfg.KeyArea, cfg.KeyAreaOffset, 0, "Y", N)
 		img := loadImage(roiFile)
 
 		aves := []float64{}

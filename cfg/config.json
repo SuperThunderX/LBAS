@@ -6,6 +6,7 @@
         "bottom": 2162
     },
     "key-area": "./cfg/key-area.json",
+    "key-area-offset": -10,
     "valid-range": [0.0, 0.35],
     "thBright": 50.0,
     "thContrast": 5.0

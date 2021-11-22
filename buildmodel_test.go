@@ -29,18 +29,18 @@ func TestFindColorArea(t *testing.T) {
 
 func TestLoadKeyArea(t *testing.T) {
 	// Audit marked ROI image
-	MarkAreaFromJSON("./cfg/model-roi.jpg", "./cfg/key-area.json", "./cfg/re-mark.jpg", "B")
+	MarkAreaFromJSON("./cfg/model-roi.jpg", "./cfg/key-area.json", 0, 0, "./cfg/re-mark.jpg", "B")
 }
 
 func TestSplitAreaPts(t *testing.T) {
-	areas := SplitAreaPts("./cfg/key-area.json", "Y", 100)
+	areas := SplitAreaPts("./cfg/key-area.json", 0, 0, "Y", 100)
 	for i, area := range areas {
 		fmt.Println(i, len(area))
 	}
 }
 
 func TestStatAreaPixel(t *testing.T) {
-	areas := SplitAreaPts("./cfg/key-area.json", "Y", 100)
+	areas := SplitAreaPts("./cfg/key-area.json", 0, 0, "Y", 100)
 	img := loadImage("./cfg/roi-(2500,50)-(3000,2162).jpg")
 
 	aves := []float64{}
