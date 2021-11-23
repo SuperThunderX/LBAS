@@ -34,14 +34,40 @@ func NewROI2(file string, rect image.Rectangle) ROI {
 }
 
 func ModelROI(imgfile, outROIfile string, rect image.Rectangle) {
+	if rect == image.Rect(0, 0, 0, 0) {
+		rect = loadImage(imgfile).Bounds()
+	}
 	roi := NewROI2(imgfile, rect)
 	saveJPG(roi.data, outROIfile)
 }
 
-func MarkedArea2JSON(mROIFile, outJSONFile string) {
+func MarkedArea2JSON(mROIFile, outJSONFile, clr string) {
+
+	var r, g, b byte
+	switch clr {
+	case "W", "w":
+		r, g, b = 255, 255, 255
+	case "K", "k":
+		r, g, b = 0, 0, 0
+	case "R", "r":
+		r, g, b = 255, 0, 0
+	case "G", "g":
+		r, g, b = 0, 255, 0
+	case "B", "b":
+		r, g, b = 0, 0, 255
+	case "C", "c":
+		r, g, b = 0, 255, 255
+	case "Y", "y":
+		r, g, b = 255, 255, 0
+	case "M", "m":
+		r, g, b = 255, 0, 255
+	default:
+		r, g, b = 0, 0, 0
+	}
+
 	// search
 	img := loadImage(mROIFile)
-	mPt := FindColorArea(img, color.RGBA{0, 255, 0, 0})
+	mPt := FindColorArea(img, color.RGBA{r, g, b, 0})
 	fmt.Println(len(mPt))
 
 	// store

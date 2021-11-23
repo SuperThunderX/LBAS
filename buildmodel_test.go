@@ -24,7 +24,10 @@ func TestModelROI(t *testing.T) {
 
 func TestFindColorArea(t *testing.T) {
 	// Generate Area Configuration
-	MarkedArea2JSON("./cfg/model-roi.jpg", "./cfg/key-area.json")
+	MarkedArea2JSON("./in/sample/marked/sample.jpg", "./cfg/key-area-23Nov-G.json", "G")
+	MarkedArea2JSON("./in/sample/marked/sample.jpg", "./cfg/key-area-23Nov-R.json", "R")
+	MarkedArea2JSON("./in/sample/marked/sample.jpg", "./cfg/key-area-23Nov-B.json", "B")
+	MarkedArea2JSON("./in/sample/marked/sample.jpg", "./cfg/key-area-23Nov-M.json", "M")
 }
 
 func TestLoadKeyArea(t *testing.T) {

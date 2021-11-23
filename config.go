@@ -10,25 +10,29 @@ import (
 
 type Config struct {
 	Roi struct {
-		Left   int `json:"left"`
-		Top    int `json:"top"`
-		Right  int `json:"right"`
-		Bottom int `json:"bottom"`
+		Left     int `json:"left"`
+		Top      int `json:"top"`
+		Right    int `json:"right"`
+		Bottom   int `json:"bottom"`
+		AimAreas []struct {
+			File       string     `json:"file"`
+			Offset     int        `json:"offset"`
+			ValidRange [2]float64 `json:"valid-range"`
+			ThBright   float64    `json:"thBright"`
+			ThContrast float64    `json:"thContrast"`
+		} `json:"aim-areas"`
 	} `json:"roi"`
-	KeyArea       string     `json:"key-area"`
-	KeyAreaOffset int        `json:"key-area-offset"`
-	ValidRange    [2]float64 `json:"valid-range"`
-	ThBright      float64    `json:"thBright"`
-	ThContrast    float64    `json:"thContrast"`
 }
 
 func (c *Config) String() (s string) {
-	s += fmt.Sprintf("%-40s%v\n", "checking area:", c.Roi)
-	s += fmt.Sprintf("%-40s%v\n", "key area:", c.KeyArea)
-	s += fmt.Sprintf("%-40s%v\n", "key area offset:", c.KeyAreaOffset)
-	s += fmt.Sprintf("%-40s%v\n", "checking range:", c.ValidRange)
-	s += fmt.Sprintf("%-40s%v\n", "threshold for brighter area:", c.ThBright)
-	s += fmt.Sprintf("%-40s%v\n", "contrast for bright/dark areas:", c.ThContrast)
+	s += fmt.Sprintf("%-40s[%v,%v,%v,%v]\n", "aimming area:", c.Roi.Left, c.Roi.Top, c.Roi.Right, c.Roi.Bottom)
+	for _, area := range c.Roi.AimAreas {
+		s += fmt.Sprintf("  %-38s%v\n", "key area:", area.File)
+		s += fmt.Sprintf("  %-38s%v\n", "key area offset:", area.Offset)
+		s += fmt.Sprintf("  %-38s%v\n", "checking range:", area.ValidRange)
+		s += fmt.Sprintf("  %-38s%v\n", "threshold for brighter area:", area.ThBright)
+		s += fmt.Sprintf("  %-38s%v\n\n", "contrast for bright/dark areas:", area.ThContrast)
+	}
 	return s
 }
 

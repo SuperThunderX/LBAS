@@ -1,13 +1,37 @@
 {
     "roi": {
-        "left": 2500,
-        "top": 50,
-        "right": 3000,
-        "bottom": 2162
-    },
-    "key-area": "./cfg/key-area.json",
-    "key-area-offset": -10,
-    "valid-range": [0.0, 0.35],
-    "thBright": 50.0,
-    "thContrast": 5.0
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "aim-areas": [
+            {
+                "file": "./cfg/key-area-23Nov-R.json",
+                "offset": 0,
+                "valid-range": [0.0, 1.0],
+                "thBright": 80.0,
+                "thContrast": 15.0
+            },
+            {
+                "file": "./cfg/key-area-23Nov-G.json",
+                "offset": 0,
+                "valid-range": [0.0, 1.0],
+                "thBright": 80.0,
+                "thContrast": 15.0
+            },
+            {
+                "file": "./cfg/key-area-23Nov-B.json",
+                "offset": 0,
+                "valid-range": [0.0, 1.0],
+                "thBright": 80.0,
+                "thContrast": 15.0
+            },            {
+                "file": "./cfg/key-area-23Nov-M.json",
+                "offset": 0,
+                "valid-range": [0.0, 1.0],
+                "thBright": 80.0,
+                "thContrast": 20.0
+            }
+        ]
+    }
 }
